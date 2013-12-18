@@ -1,0 +1,7 @@
+io:format("setting up path~n~n"),
+Dir = "./deps",
+{ok, L} = file:list_dir(Dir),
+code:add_path("./ebin"),
+lists:foreach(fun(I) ->
+                     Path = Dir ++ "/" ++ I ++ "/ebin",
+                     code:add_path(Path) end, L).
