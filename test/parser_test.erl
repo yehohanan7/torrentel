@@ -1,8 +1,7 @@
--module(torrental_parser_test).
+-module(parser_test).
 -author("johnvp").
 
 -include_lib("eunit/include/eunit.hrl").
--record(torrent, {url = ""}).
 
 simple_test() ->
   ?assert(true).
@@ -10,5 +9,5 @@ simple_test() ->
 
 parser_test() ->
   {ok, Data} = file:read_file("/Users/johnvp/dev/torrentel/test/test_torrent.torrent"),
-  #torrent{url = Url} = torrentel_parser:parse(Data, #torrent{}),
-  ?assertEqual(Url, "").
+  {ok, Dict} = parser:parse(Data),
+  ?assert(dict:size(Dict) > 0).
